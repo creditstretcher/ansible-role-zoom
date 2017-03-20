@@ -1,3 +1,10 @@
 ---
 # tasks file for kennyr707.zoom
+- get_url:
+    url: https://zoom.us/client/latest/zoom_amd64.deb
+    dest: /tmp/zoom_amd64.deb
+- apt:
+    name: libxcb-xtest0
+- command: dpkg -i /tmp/zoom_amd64.deb
+- command: apt-get -f install
 
