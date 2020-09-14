@@ -1,10 +1,18 @@
 ---
 # tasks file for kennyr707.zoom
+- name: Check for pre-downloaded binary
+  stat: path="/tmp/zoom_amd64.deb"
+  register: file_stats
 - get_url:
     url: https://zoom.us/client/latest/zoom_amd64.deb
     dest: /tmp/zoom_amd64.deb
+  when: not file_stats.stat.exists
 - apt:
-    name: libxcb-xtest0
+    pkg:
+    - libxcb-xtest0
+    - libegl1-mesa
 - command: dpkg -i /tmp/zoom_amd64.deb
+  when: not file_stats.stat.exists
 - command: apt-get -f install
+  when: not file_stats.stat.exists
 
