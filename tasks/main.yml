@@ -1,7 +1,7 @@
 ---
 # tasks file for kennyr707.zoom
-- name: Check for pre-downloaded binary
-  stat: path="/tmp/zoom_amd64.deb"
+- name: Check for zoom binary
+  stat: path="/usr/bin/zoom"
   register: file_stats
 - get_url:
     url: https://zoom.us/client/latest/zoom_amd64.deb
